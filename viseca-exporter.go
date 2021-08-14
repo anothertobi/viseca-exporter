@@ -18,13 +18,13 @@ type Transaction struct {
 	MerchantName string  `json:"merchantName"`
 }
 
-const URL_PRE = "https://api.one-digitalservice.ch/v1/card/"
+const URL_PRE = "https://api.one.viseca.ch/v1/card/"
 const URL_POST = "/transactions?stateType=unknown&offset=0&pagesize=1000"
 
 // arg0: cardID
 // arg1: sessionCookie (e.g. `AL_SESS-S=...`)
 func main() {
-	transactions := getTransactions(os.Args[0], os.Args[1])
+	transactions := getTransactions(os.Args[1], os.Args[2])
 	printTransactions(transactions)
 }
 
@@ -33,7 +33,9 @@ func getTransactions(cardID, sessionCookie string) Transactions {
 
 	client := &http.Client{}
 
-	req, err := http.NewRequest("GET", URL_PRE+cardID+URL_POST, nil)
+	url := URL_PRE + cardID + URL_POST
+
+	req, err := http.NewRequest("GET", url, nil)
 	check(err)
 	req.Header.Add("Accept", "application/json")
 	req.Header.Add("Cookie", sessionCookie)
