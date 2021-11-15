@@ -8,8 +8,8 @@ Little helper to get transactions from Viseca One and print them in CSV format.
 1. Open the developer tools of your browser and navigate to the network tab
 1. Go to "Transaktionen" on [one.viseca.ch](https://one.viseca.ch)
 1. Filter the URLs in the network tab of the developer tools for `transactions`
-1. Save the card ID from the path (between `/v1/card/` and `/transactions`) to an env file (see exmaples)
-1. Save the session cookie (`AL_SESS-S=AAAAAA...`) to an env file (see exmaples)
+1. Save the card ID from the path (between `/v1/card/` and `/transactions`) to an env file (see examples)
+1. Save the session cookie (`AL_SESS-S=AAAAAA...`) to an env file (see examples)
 
 1.  ```
     source .env
