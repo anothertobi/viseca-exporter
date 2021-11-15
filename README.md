@@ -13,7 +13,7 @@ Little helper to get transactions from Viseca One and print them in CSV format.
 
 1.  ```
     source .env
-    go run viseca-exporter.go "$CARDID" "$COOKIE"
+    go run viseca-exporter.go "$CARDID" "$COOKIE" > data/export.csv
     ```
 
 
