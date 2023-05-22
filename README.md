@@ -13,7 +13,7 @@ Little helper to get transactions from Viseca One and print them in CSV format.
 
 1.  ```
     source .env
-    go run viseca-exporter.go "$CARDID" "$COOKIE" > data/export.csv
+    go run main.go "$CARDID" "$COOKIE" > data/export.csv
     ```
 
 
@@ -22,8 +22,16 @@ Little helper to get transactions from Viseca One and print them in CSV format.
 ### Env file
 ```
 export CARDID=0000000AAAAA0000
-export COOKIE=AL_SESS-S=AAAAAAAAAA...
+export COOKIE=AAAAAAAAAA...
 ```
+
+## API
+
+### Known issues
+
+The API returns `500 Internal Server Error` without any additional information when a request doesn't meet the API requirements.
+
+Large page sizes (e.g. 1000) lead to an error.
 
 ### API Output
 
