@@ -26,11 +26,13 @@ func main() {
 		log.Fatalf("error initializing Viseca API client: %v", err)
 	}
 
-	transactions, err := ListAllTransactions(visecaClient, os.Args[1])
+	ctx := context.Background()
+
+	transactions, err := visecaClient.ListAllTransactions(ctx, os.Args[1])
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("error listing all transactions: %v", err)
 	}
-	fmt.Println(csv.TransactionsString(*transactions))
+	fmt.Println(csv.TransactionsString(transactions))
 }
 
 func initClient(sessionCookie string) (*viseca.Client, error) {
@@ -49,25 +51,6 @@ func initClient(sessionCookie string) (*viseca.Client, error) {
 	httpClient.Jar.SetCookies(visecaClient.BaseURL, []*http.Cookie{cookie})
 
 	return visecaClient, nil
-}
-
-func ListAllTransactions(visecaClient *viseca.Client, cardID string) (*viseca.Transactions, error) {
-	ctx := context.Background()
-	listOptions := viseca.NewDefaultListOptions()
-	transactions, err := visecaClient.ListTransactions(ctx, cardID, listOptions)
-	if err != nil {
-		return nil, err
-	}
-	for listOptions.Offset+listOptions.PageSize < transactions.TotalCount {
-		listOptions.Offset += listOptions.PageSize
-		transactionsPage, err := visecaClient.ListTransactions(ctx, cardID, listOptions)
-		if err != nil {
-			return nil, err
-		}
-		transactions.Transactions = append(transactions.Transactions, transactionsPage.Transactions...)
-	}
-
-	return transactions, nil
 }
 
 func extractSessionCookieValue(sessionCookie string) string {

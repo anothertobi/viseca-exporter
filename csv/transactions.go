@@ -8,13 +8,13 @@ import (
 )
 
 // TransactionsString() returns a CSV representation of the transactions.
-func TransactionsString(transactions viseca.Transactions) string {
+func TransactionsString(transactions []viseca.Transaction) string {
 	var stringBuilder strings.Builder
 
 	stringBuilder.WriteString(`"TransactionID","Date","Merchant","Amount","PFMCategoryID","PFMCategoryName"`)
 	stringBuilder.WriteString("\n")
 
-	for _, transaction := range transactions.Transactions {
+	for _, transaction := range transactions {
 		stringBuilder.WriteString(TransactionString(transaction))
 		stringBuilder.WriteString("\n")
 	}
