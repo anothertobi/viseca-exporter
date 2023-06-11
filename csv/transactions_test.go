@@ -48,7 +48,7 @@ func TestTransactionString(t *testing.T) {
 }
 
 func TestTransactionsString(t *testing.T) {
-	inputTransactions := viseca.Transactions{Transactions: []viseca.Transaction{inputTransaction}}
+	inputTransactions :=  []viseca.Transaction{inputTransaction}
 	expected :=
 		`"TransactionID","Date","Merchant","Amount","PFMCategoryID","PFMCategoryName"` +
 			"\n" +
