@@ -27,8 +27,13 @@ func (client *Client) ListTransactions(ctx context.Context, card string, listOpt
 
 // ListAllTransactions lists all transactions for the given card.
 func (client *Client) ListAllTransactions(ctx context.Context, card string) ([]Transaction, error) {
-	var transactions []Transaction
 	listOptions := NewDefaultListOptions()
+	return client.ListAllTransactionsOpts(ctx, card, listOptions)
+}
+
+// ListAllTransactions lists all transactions for the given card and options.
+func (client *Client) ListAllTransactionsOpts(ctx context.Context, card string, listOptions ListOptions) ([]Transaction, error) {
+	var transactions []Transaction
 
 	for {
 		transactionsPage, err := client.ListTransactions(ctx, card, listOptions)

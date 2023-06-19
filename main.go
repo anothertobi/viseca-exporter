@@ -9,8 +9,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/anothertobi/viseca-exporter/csv"
-	"github.com/anothertobi/viseca-exporter/viseca"
+	"github.com/anothertobi/viseca-exporter/internal/csv"
+	"github.com/anothertobi/viseca-exporter/pkg/viseca"
 )
 
 const sessionCookieName = "AL_SESS-S"

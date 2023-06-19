@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/anothertobi/viseca-exporter/viseca"
+	"github.com/anothertobi/viseca-exporter/pkg/viseca"
 )
 
 // TransactionsString() returns a CSV representation of the transactions.

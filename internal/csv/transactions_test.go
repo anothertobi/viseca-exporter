@@ -3,8 +3,8 @@ package csv_test
 import (
 	"testing"
 
-	"github.com/anothertobi/viseca-exporter/csv"
-	"github.com/anothertobi/viseca-exporter/viseca"
+	"github.com/anothertobi/viseca-exporter/internal/csv"
+	"github.com/anothertobi/viseca-exporter/pkg/viseca"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -48,7 +48,7 @@ func TestTransactionString(t *testing.T) {
 }
 
 func TestTransactionsString(t *testing.T) {
-	inputTransactions :=  []viseca.Transaction{inputTransaction}
+	inputTransactions := []viseca.Transaction{inputTransaction}
 	expected :=
 		`"TransactionID","Date","Merchant","Amount","PFMCategoryID","PFMCategoryName"` +
 			"\n" +
