@@ -5,24 +5,20 @@ Little helper to get transactions from Viseca One and print them in CSV format.
 ## Usage
 
 1. Log in to [one.viseca.ch](https://one.viseca.ch)
-1. Open the developer tools of your browser and navigate to the network tab
 1. Go to "Transaktionen" on [one.viseca.ch](https://one.viseca.ch)
-1. Filter the URLs in the network tab of the developer tools for `transactions`
-1. Save the card ID from the path (between `/v1/card/` and `/transactions`) to an env file (see examples)
-1. Save the session cookie (`AL_SESS-S=AAAAAA...`) to an env file (see examples)
+1. Save the card ID from the path (between `/v1/card/` and `/transactions`)
 
 1.  ```
-    source .env
-    go run main.go "$CARDID" "$COOKIE" > data/export.csv
+    export VISECA_CLI_USERNAME=<email>
+    export VISECA_CLI_PASSWORD=<password>
+    go run cmd/viseca-cli/main.go transactions <cardID>
     ```
 
+### CLI Output
 
-## Examples
-
-### Env file
-```
-export CARDID=0000000AAAAA0000
-export COOKIE=AAAAAAAAAA...
+```csv
+"TransactionID","Date","Merchant","Amount","PFMCategoryID","PFMCategoryName"
+"AUTH8c919db2-1c23-43f1-8862-61c31336d9b6","2021-10-20T17:05:44","ALDI","50.550000","cv_groceries","Groceries"
 ```
 
 ## API
@@ -73,11 +69,4 @@ Large page sizes (e.g. 1000) lead to an error.
         }
     ]
 }
-```
-
-### CLI Output
-
-```csv
-"TransactionID","Date","Merchant","Amount","PFMCategoryID","PFMCategoryName"
-"AUTH8c919db2-1c23-43f1-8862-61c31336d9b6","2021-10-20T17:05:44","ALDI","50.550000","cv_groceries","Groceries"
 ```
