@@ -34,7 +34,7 @@ func NewClient(httpClient *http.Client) *Client {
 	return client
 }
 
-const listOptionsDateToFormat = "2006-01-02T15:04:05Z"
+const listOptionsDateFormat = "2006-01-02T15:04:05Z"
 
 // ListOptions holds the options for list actions.
 type ListOptions struct {
@@ -42,6 +42,7 @@ type ListOptions struct {
 	PageSize  int
 	StateType string
 	DateTo    time.Time
+	DateFrom  time.Time
 }
 
 func NewDefaultListOptions() ListOptions {
@@ -58,8 +59,11 @@ func addListOptions(url *url.URL, listOptions ListOptions) {
 	query.Add("offset", strconv.Itoa(listOptions.Offset))
 	query.Add("pagesize", strconv.Itoa(listOptions.PageSize))
 	query.Add("statetype", listOptions.StateType)
+	if !listOptions.DateFrom.IsZero() {
+		query.Add("dateFrom", listOptions.DateFrom.Format(listOptionsDateFormat))
+	}
 	if !listOptions.DateTo.IsZero() {
-		query.Add("dateTo", listOptions.DateTo.Format(listOptionsDateToFormat))
+		query.Add("dateTo", listOptions.DateTo.Format(listOptionsDateFormat))
 	}
 
 	url.RawQuery = query.Encode()
