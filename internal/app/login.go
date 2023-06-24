@@ -10,7 +10,20 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/anothertobi/viseca-exporter/pkg/viseca"
+	"github.com/urfave/cli/v2"
 )
+
+func loginCLI(ctx context.Context, cCtx *cli.Context) (*viseca.Client, error) {
+	username := cCtx.String("username")
+	password := cCtx.String("password")
+
+	visecaClient, err := login(ctx, username, password)
+	if err != nil {
+		return nil, err
+	}
+
+	return visecaClient, nil
+}
 
 func login(ctx context.Context, username string, password string) (*viseca.Client, error) {
 	cookieJar, err := cookiejar.New(nil)

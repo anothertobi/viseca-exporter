@@ -28,6 +28,8 @@ func main() {
 		},
 		Commands: []*cli.Command{
 			app.NewTransactionsCommand(),
+			app.NewCardsCommand(),
+			app.NewUserCommand(),
 		},
 	}
 

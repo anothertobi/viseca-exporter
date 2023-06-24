@@ -45,6 +45,7 @@ type ListOptions struct {
 	DateFrom  time.Time
 }
 
+// NewDefaultListOptions creates new default ListOptions.
 func NewDefaultListOptions() ListOptions {
 	listOptions := ListOptions{}
 	listOptions.Offset = 0
@@ -64,6 +65,29 @@ func addListOptions(url *url.URL, listOptions ListOptions) {
 	}
 	if !listOptions.DateTo.IsZero() {
 		query.Add("dateTo", listOptions.DateTo.Format(listOptionsDateFormat))
+	}
+
+	url.RawQuery = query.Encode()
+}
+
+// CardListOptions known CreditIndicators are "credit" and "debit".
+type CardListOptions struct {
+	CreditIndicators []string
+}
+
+// NewDefaultCardListOptions creates new default CardListOptions.
+func NewDefaultCardListOptions() CardListOptions {
+	cardListOptions := CardListOptions{}
+	cardListOptions.CreditIndicators = []string{"credit", "debit"}
+
+	return cardListOptions
+}
+
+func addCardListOptions(url *url.URL, cardListOptions CardListOptions) {
+	query := url.Query()
+
+	for _, creditIndicator := range cardListOptions.CreditIndicators {
+		query.Add("creditIndicators", creditIndicator)
 	}
 
 	url.RawQuery = query.Encode()
