@@ -51,3 +51,22 @@ func (client *Client) ListAllTransactionsOpts(ctx context.Context, card string, 
 
 	return transactions, nil
 }
+
+// ListCards returns all cards for the given CardListOptions.
+func (client *Client) ListCards(ctx context.Context, cardListOptions CardListOptions) (*[]Card, error) {
+	request, err := client.NewRequest("cards", "GET", nil)
+	if err != nil {
+		return nil, err
+	}
+
+	addCardListOptions(request.URL, cardListOptions)
+
+	cards := &[]Card{}
+
+	_, err = client.Do(ctx, request, cards)
+	if err != nil {
+		return nil, err
+	}
+
+	return cards, err
+}

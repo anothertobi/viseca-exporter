@@ -49,10 +49,7 @@ func transactions(cCtx *cli.Context) error {
 	}
 	cardID := cCtx.Args().First()
 
-	username := cCtx.String("username")
-	password := cCtx.String("password")
-
-	visecaClient, err := login(ctx, username, password)
+	visecaClient, err := loginCLI(ctx, cCtx)
 	if err != nil {
 		return err
 	}
