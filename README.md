@@ -4,6 +4,12 @@ Little helper to get transactions from Viseca One and print them in CSV format.
 
 ## Usage
 
+While the "auth w/o browser" method is a very comfortable way to get the transactions, it has a higher risk to error due to changes to the auth flow of Viseca One. If it fails, try the "auth w/ browser" method.
+
+### Auth w/o browser
+
+This method processes the auth flow in the CLI and will trigger a 2FA request like the login in a browser would.
+
 1. Log in to [one.viseca.ch](https://one.viseca.ch)
 1. Go to "Transaktionen" on [one.viseca.ch](https://one.viseca.ch)
 1. Save the card ID from the path (between `/v1/card/` and `/transactions`)
@@ -14,7 +20,23 @@ Little helper to get transactions from Viseca One and print them in CSV format.
     go run cmd/viseca-cli/main.go transactions <cardID>
     ```
 
-### CLI Output
+### Auth w/ browser
+
+This method requires a valid session cookie obtained from an authenticated browser session.
+
+1. Log in to [one.viseca.ch](https://one.viseca.ch)
+1. Open the developer tools of your browser and navigate to the network tab
+1. Go to "Transaktionen" on [one.viseca.ch](https://one.viseca.ch)
+1. Filter the URLs in the network tab of the developer tools for `transactions`
+1. Save the card ID from the path (between `/v1/card/` and `/transactions`) to an env file (see examples)
+1. Save the session cookie (`AL_SESS-S=AAAAAA...`) to an env file (see examples)
+
+1.  ```
+    source .env
+    go run main.go "$CARDID" "$COOKIE" > data/export.csv
+    ```
+
+## Example Output
 
 ```csv
 "TransactionID","Date","Merchant","Amount","PFMCategoryID","PFMCategoryName"
