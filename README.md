@@ -38,8 +38,10 @@ This method requires a valid session cookie obtained from an authenticated brows
 
 ## Example .env 
 
+```
 VISECA_SESS=AL_SESS-S=xxxxxxxxxxxxxxxyyyyyy
 VISECA_CARD=443592xxxxxxxxxx
+```
 
 ## Example Output
 
