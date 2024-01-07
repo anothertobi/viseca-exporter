@@ -33,8 +33,15 @@ This method requires a valid session cookie obtained from an authenticated brows
 
 1.  ```
     source .env
-    go run main.go "$CARDID" "$COOKIE" > data/export.csv
+    go run main.go "$VISECA_CARD" "$VISECA_SESS" > data/export.csv
     ```
+
+## Example .env 
+
+```
+VISECA_SESS=AL_SESS-S=xxxxxxxxxxxxxxxyyyyyy
+VISECA_CARD=443592xxxxxxxxxx
+```
 
 ## Example Output
 
