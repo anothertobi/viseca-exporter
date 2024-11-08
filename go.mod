@@ -2,7 +2,7 @@ module github.com/anothertobi/viseca-exporter
 
 go 1.23
 
-toolchain go1.23.2
+toolchain go1.23.3
 
 require (
 	github.com/PuerkitoBio/goquery v1.10.0
