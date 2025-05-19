@@ -11,7 +11,7 @@ import (
 func TransactionsString(transactions []viseca.Transaction) string {
 	var stringBuilder strings.Builder
 
-	stringBuilder.WriteString(`"TransactionID","Date","Merchant","Amount","PFMCategoryID","PFMCategoryName"`)
+	stringBuilder.WriteString(`"TransactionID","Date","Merchant","Amount","Currency","OriginalAmount","OriginalCurrency","PFMCategoryID","PFMCategoryName"`)
 	stringBuilder.WriteString("\n")
 
 	for _, transaction := range transactions {
@@ -29,6 +29,9 @@ func TransactionString(transaction viseca.Transaction) string {
 		transaction.Date,
 		prettiestMerchantName(transaction),
 		fmt.Sprintf("%.2f", transaction.Amount),
+		transaction.Currency,
+		fmt.Sprintf("%.2f", transaction.OriginalAmount),
+		transaction.OriginalCurrency,
 		transaction.PFMCategory.ID,
 		transaction.PFMCategory.Name,
 	}, `","`)
