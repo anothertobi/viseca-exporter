@@ -16,7 +16,8 @@ import (
 const sessionCookieName = "AL_SESS-S"
 
 // arg0: cardID
-// arg1: sessionCookie (e.g. `AL_SESS-S=...`)
+// arg1: sessionCookie (example: `AL_SESS-S=...`)
+// arg2: includeForeignCurrency (example: "true")
 func main() {
 	if len(os.Args) < 3 {
 		log.Fatal("card ID and session cookie args required")
