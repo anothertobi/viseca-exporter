@@ -57,3 +57,33 @@ func TestTransactionsString(t *testing.T) {
 
 	assert.Equal(t, expected, csv.TransactionsString(inputTransactions))
 }
+
+func TestForeignCurrencyTransaction(t *testing.T) {
+	foreignTransaction := viseca.Transaction{
+		TransactionID:    "TRX2025051200004466612",
+		Date:             "2025-05-12T09:01:20+02:00",
+		MerchantName:     "CLAUDE.AI SUBSCRIPTION",
+		PrettyName:       "Claude.ai",
+		IsOnline:         true,
+		Amount:           17.15,
+		Currency:         "CHF",
+		OriginalAmount:   20.00,
+		OriginalCurrency: "USD",
+		PFMCategory: viseca.PFMCategory{
+			ID:   "entertainment_and_leisure",
+			Name: "Entertainment & Leisure",
+		},
+		StateType: "booked",
+		Details:   "CLAUDE.AI SUBSCRIPTION",
+		Type:      "merchant",
+		IsBilled:  true,
+	}
+
+	expected := `"TRX2025051200004466612","2025-05-12T09:01:20+02:00","Claude.ai","17.15","CHF","20.00","USD","entertainment_and_leisure","Entertainment & Leisure"`
+
+	options := csv.TransactionOptions{
+		IncludeForeignCurrency: true,
+	}
+
+	assert.Equal(t, expected, csv.TransactionStringWithOptions(foreignTransaction, options))
+}

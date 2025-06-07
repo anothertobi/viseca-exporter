@@ -16,7 +16,8 @@ import (
 const sessionCookieName = "AL_SESS-S"
 
 // arg0: cardID
-// arg1: sessionCookie (e.g. `AL_SESS-S=...`)
+// arg1: sessionCookie (example: `AL_SESS-S=...`)
+// arg2: includeForeignCurrency (example: "true")
 func main() {
 	if len(os.Args) < 3 {
 		log.Fatal("card ID and session cookie args required")
@@ -32,7 +33,16 @@ func main() {
 	if err != nil {
 		log.Fatalf("error listing all transactions: %v", err)
 	}
-	fmt.Println(csv.TransactionsString(transactions))
+
+	includeForeignCurrency := false
+	if len(os.Args) == 4 && strings.ToLower(os.Args[3]) == "true" {
+		includeForeignCurrency = true
+	}
+	options := csv.TransactionOptions{
+		IncludeForeignCurrency: includeForeignCurrency,
+	}
+
+	fmt.Println(csv.TransactionsStringWithOptions(transactions, options))
 }
 
 func initClient(sessionCookie string) (*viseca.Client, error) {
