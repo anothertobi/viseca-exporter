@@ -32,7 +32,16 @@ func main() {
 	if err != nil {
 		log.Fatalf("error listing all transactions: %v", err)
 	}
-	fmt.Println(csv.TransactionsString(transactions))
+
+	includeForeignCurrency := false
+	if len(os.Args) == 4 && strings.ToLower(os.Args[3]) == "true" {
+		includeForeignCurrency = true
+	}
+	options := csv.TransactionOptions{
+		IncludeForeignCurrency: includeForeignCurrency,
+	}
+
+	fmt.Println(csv.TransactionsStringWithOptions(transactions, options))
 }
 
 func initClient(sessionCookie string) (*viseca.Client, error) {

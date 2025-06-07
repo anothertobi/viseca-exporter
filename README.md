@@ -50,6 +50,24 @@ VISECA_CARD=443592xxxxxxxxxx
 "AUTH8c919db2-1c23-43f1-8862-61c31336d9b6","2021-10-20T17:05:44","ALDI","50.550000","cv_groceries","Groceries"
 ```
 
+## Foregin currencies
+
+To include foreign currencies, true can be provided as the third argument to `main.go`:
+```shell
+go run main.go "$VISECA_CARD" "$VISECA_SESS" "true" > data/export.csv
+```
+
+or the foreignCurrencies flag set for the CLI:
+```shell
+go run cmd/viseca-cli/main.go transactions --foreign-currency=true
+```
+
+This will result in an output like the following, additionally including the currency, original amount and original currency:
+```csv
+"TransactionID","Date","Merchant","Amount","Currency","OriginalAmount","OriginalCurrency","PFMCategoryID","PFMCategoryName"
+"AUTH8c919db2-1c23-43f1-8862-61c31336d9b6","2021-10-20T17:05:44","ALDI","50.55","CHF","20.00","USD","cv_groceries","Groceries"
+```
+
 ## API
 
 ### Known issues
