@@ -6,7 +6,7 @@ toolchain go1.24.1
 
 require (
 	github.com/PuerkitoBio/goquery v1.10.3
-	github.com/stretchr/testify v1.10.0
+	github.com/stretchr/testify v1.11.0
 	github.com/urfave/cli/v2 v2.27.7
 )
 
