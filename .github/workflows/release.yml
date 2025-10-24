@@ -16,7 +16,7 @@ jobs:
         with:
           fetch-depth: 0
       - run: git fetch --force --tags
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
         with:
           go-version: stable
       - uses: goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a
