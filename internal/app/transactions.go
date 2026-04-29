@@ -13,6 +13,7 @@ import (
 
 const flagDateFrom = "date-from"
 const flagDateTo = "date-to"
+const flagForeignCurrency = "foreign-currency"
 
 // NewTransactionsCommand creates a new transactions CLI command
 func NewTransactionsCommand() *cli.Command {
@@ -32,6 +33,10 @@ func NewTransactionsCommand() *cli.Command {
 				Usage:    "to which date transactions should be fetched (format: 2006-01-02)",
 				Layout:   "2006-01-02",
 				Timezone: time.Local,
+			},
+			&cli.BoolFlag{
+				Name:  flagForeignCurrency,
+				Usage: "if foreign currencies and the original amount should be included in the output",
 			},
 		},
 		Action: func(cCtx *cli.Context) error {
@@ -70,7 +75,13 @@ func transactions(cCtx *cli.Context) error {
 		return err
 	}
 
-	out := csv.TransactionsString(transactions)
+	includeForeignCurrency := cCtx.Bool(flagForeignCurrency)
+
+	options := csv.TransactionOptions{
+		IncludeForeignCurrency: includeForeignCurrency,
+	}
+
+	out := csv.TransactionsStringWithOptions(transactions, options)
 	fmt.Print(out)
 
 	return nil
