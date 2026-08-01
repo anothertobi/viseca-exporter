@@ -12,7 +12,7 @@ This method processes the auth flow in the CLI and will trigger a 2FA request li
 
 1. Log in to [one.viseca.ch](https://one.viseca.ch)
 1. Go to "Transaktionen" on [one.viseca.ch](https://one.viseca.ch)
-1. Save the card ID from the path (between `/v1/card/` and `/transactions`)
+1. Save the card ID from the path (between `/v1/reports/cards/` and `/transactions`)
 
 1.  ```
     export VISECA_CLI_USERNAME=<email>
@@ -28,7 +28,7 @@ This method requires a valid session cookie obtained from an authenticated brows
 1. Open the developer tools of your browser and navigate to the network tab
 1. Go to "Transaktionen" on [one.viseca.ch](https://one.viseca.ch)
 1. Filter the URLs in the network tab of the developer tools for `transactions`
-1. Save the card ID from the path (between `/v1/card/` and `/transactions`) to an env file (see examples)
+1. Save the card ID from the path (between `/v1/reports/cards/` and `/transactions`) to an env file (see examples)
 1. Save the session cookie (`AL_SESS-S=AAAAAA...`) to an env file (see examples)
 
 1.  ```
