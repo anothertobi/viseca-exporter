@@ -2,6 +2,14 @@ version: 2
 updates:
 - package-ecosystem: "github-actions"
   directory: "/"
+  groups:
+    minor-patch:
+      update-types:
+        - minor
+        - patch
+    codeql:
+      patterns:
+        - github/codeql-action/*
   schedule:
     interval: "weekly"
 - package-ecosystem: "gomod"
@@ -10,7 +18,6 @@ updates:
   - dependency-type: all
   groups:
     minor-patch:
-      applies-to: version-updates
       update-types:
         - minor
         - patch
