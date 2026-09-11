@@ -7,7 +7,7 @@ import (
 
 // ListTransactions returns the transactions for the given card and listOptions.
 func (client *Client) ListTransactions(ctx context.Context, card string, listOptions ListOptions) (*Transactions, error) {
-	path := fmt.Sprintf("card/%s/transactions", card)
+	path := fmt.Sprintf("reports/cards/%s/transactions", card)
 
 	request, err := client.NewRequest(path, "GET", nil)
 	if err != nil {
