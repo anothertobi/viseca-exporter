@@ -38,16 +38,18 @@ const listOptionsDateFormat = "2006-01-02T15:04:05Z"
 
 // ListOptions holds the options for list actions.
 type ListOptions struct {
-	Offset    int
-	PageSize  int
-	StateType string
-	DateTo    time.Time
-	DateFrom  time.Time
+	OnlyCurrentCycle bool
+	Offset           int
+	PageSize         int
+	StateType        string
+	DateTo           time.Time
+	DateFrom         time.Time
 }
 
 // NewDefaultListOptions creates new default ListOptions.
 func NewDefaultListOptions() ListOptions {
 	listOptions := ListOptions{}
+	listOptions.OnlyCurrentCycle = false
 	listOptions.Offset = 0
 	listOptions.PageSize = 100
 	listOptions.StateType = "unknown"
@@ -57,6 +59,7 @@ func NewDefaultListOptions() ListOptions {
 
 func addListOptions(url *url.URL, listOptions ListOptions) {
 	query := url.Query()
+	query.Add("onlyCurrentCycle", strconv.FormatBool(listOptions.OnlyCurrentCycle))
 	query.Add("offset", strconv.Itoa(listOptions.Offset))
 	query.Add("pagesize", strconv.Itoa(listOptions.PageSize))
 	query.Add("statetype", listOptions.StateType)
